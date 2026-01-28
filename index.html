@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nghĩa & Mai — Wedding Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background: #FBF6EE;
+  color: #7A1414;
+  scroll-behavior: smooth;
+}
+
+section {
+  max-width: 1150px;
+  margin: auto;
+  padding: 120px 22px;
+  text-align: center;
+}
+
+.hero {
+  height: 95vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #fffaf3, #f3e7dc);
+}
+
+.hero h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 88px;
+  margin-bottom: 10px;
+}
+
+.fade {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 1.4s ease;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.divider {
+  width: 70px;
+  height: 2px;
+  background: #7A1414;
+  margin: 18px auto;
+}
+
+.btn {
+  margin-top: 25px;
+  display: inline-block;
+  padding: 14px 34px;
+  border: 1px solid #7A1414;
+  color: #7A1414;
+  text-decoration: none;
+  border-radius: 40px;
+  transition: .35s;
+}
+
+.btn:hover {
+  background: #7A1414;
+  color: white;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.grid img {
+  width: 100%;
+  border-radius: 16px;
+  transition: .45s;
+  cursor: pointer;
+}
+
+.grid img:hover {
+  transform: scale(1.07);
+}
+
+footer {
+  padding: 90px 20px;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.lightbox img {
+  max-width: 90%;
+  border-radius: 16px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/audio/2023/03/13/audio_9e1fa5b8f2.mp3" type="audio/mpeg">
+</audio>
+
+<!-- HERO -->
+<section class="hero fade">
+  <div>
+    <h1>Nghĩa & Mai</h1>
+    <h3>SAVE THE DATE</h3>
+    <div class="divider"></div>
+    <h2>14.03.2026</h2>
+  </div>
+</section>
+
+<section class="fade">
+  <h2>LỄ VU QUY</h2>
+  <p><strong>Đông Văn Nghĩa & Đinh Thu Mai</strong></p>
+</section>
+
+<section class="fade">
+  <h2>THỜI GIAN</h2>
+  <h3>13:30 — Thứ Bảy</h3>
+  <h3>14 Tháng 03 Năm 2026</h3>
+</section>
+
+<section class="fade">
+  <h2>ĐỊA ĐIỂM</h2>
+  <p>Trống Đồng Palace — Long Biên</p>
+  <p>Tasco Mall, 7–9 Nguyễn Văn Linh, Hà Nội</p>
+  <a class="btn" href="https://maps.google.com" target="_blank">📍 Xem bản đồ</a>
+</section>
+
+<section class="fade">
+  <h2>THIỆP MỜI</h2>
+  <p>
+    Sự hiện diện của quý vị là niềm vinh hạnh của gia đình chúng tôi.  
+    Rất hân hạnh được đón tiếp!
+  </p>
+</section>
+
+<section class="fade">
+  <h2>GALLERY</h2>
+  <div class="grid">
+    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" onclick="openLightbox(this)">
+    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1" onclick="openLightbox(this)">
+    <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e" onclick="openLightbox(this)">
+  </div>
+</section>
+
+<section class="fade">
+  <h2>RSVP</h2>
+  <a class="btn" href="https://forms.gle" target="_blank">💌 Xác nhận tham dự</a>
+</section>
+
+<section class="fade">
+  <h2>MỪNG CƯỚI</h2>
+  <p>Quét QR để gửi lời chúc & mừng cưới</p>
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=Chuc-mung-Nghia-Mai">
+</section>
+
+<footer class="fade">
+  <h2>Trân trọng cảm ơn!</h2>
+  <p>Nghĩa & Mai</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="this.style.display='none'">
+  <img id="lightbox-img">
+</div>
+
+<script>
+// Scroll reveal animation
+const reveals = document.querySelectorAll('.fade');
+const revealOnScroll = () => {
+  reveals.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 80) {
+      el.classList.add('show');
+    }
+  });
+};
+window.addEventListener('scroll', revealOnScroll);
+revealOnScroll();
+
+// Lightbox
+function openLightbox(img) {
+  document.getElementById('lightbox').style.display = "flex";
+  document.getElementById('lightbox-img').src = img.src;
+}
+</script>
+
+</body>
+</html>
